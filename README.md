@@ -1,6 +1,6 @@
-= somePeople =
+# somePeople #
 
 openframeworks example which isololates people in a scene
 
-== dependancies ==
+## dependancies ##
 ofxOpenNI
