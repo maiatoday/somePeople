@@ -83,6 +83,10 @@ void testApp::draw(){
         ofTranslate(320, 240, -1000);
         user.drawPointCloud();
         ofPopMatrix();
+        //TODO need to figure out centre coordinates relative to how it's drawn
+//        ofPoint centrePoint = user.getCenter();
+//        ofSetColor(0, 255, 0);
+//        ofEllipse(centrePoint.x,centrePoint.y,50,30);
     }
     ofDisableBlendMode();
     ofPopMatrix();
