@@ -247,13 +247,22 @@ void testApp::drawUserCenter(ofxUserGenerator * user_generator, int userID) {
 	translationPoint.y = h/2;
 	translationPoint.z = -500;
 	ofxTrackedUser* user = user_generator->getTrackedUser(userID);
-	XnPoint3D center = user->center;
-	ofPoint pos = user_generator->getWorldCoordinateAt(center.X, center.Y, userID);
-	//TODO figure out where exactly the center is
+	XnPoint3D center = user->center; //TODO need to convert position to Projective
+	//	depth_generator.ConvertRealWorldToProjective(1, &center, &center);
+	//	pos = ofPoint(center.X, center.Y, center.Z);
+	//			pos.x = (pos.x / xres);
+	//			pos.y = (pos.y / yres);
+	//			pos.z = (pos.z / zres);
+	ofPoint pos = ofPoint(center.X, center.Y, center.Z);
+//	pos.x = 200;
+//	pos.y = 200;
+//	pos.z = 200;
 	ofPushMatrix();
 	ofTranslate(translationPoint);
-	ofSetColor(0,255,0,255);
-	ofSphere(pos, 10);
+	ofSetColor(255,0,255,255);
+	ofNoFill();
+	ofEllipse(pos, 10, 10);
+	ofFill();
 	ofPopMatrix();
 
 
