@@ -48,6 +48,7 @@ public:
 
 	void				drawMasks();
 	void				drawPointCloud(ofxUserGenerator * user_generator, int userID);
+	void				drawUserCenter(ofxUserGenerator * user_generator, int userID);
 
 	int					nearThreshold, farThreshold;
 	int					pointCloudRotationY;

@@ -147,7 +147,7 @@ void testApp::draw(){
 
 			if (isMasking) drawMasks();
 			if (isCloud) drawPointCloud(&recordUser, 1);	// 0 gives you all point clouds; use userID to see point clouds for specific users
-
+            drawUserCenter(&recordUser, 1);
 		}
 		if (isTrackingHands)
 			recordHandTracker.drawHands();
@@ -236,6 +236,35 @@ void testApp:: drawMasks() {
 	user1Mask.draw(320, 480, 320, 240);
 	user2Mask.draw(640, 480, 320, 240);
 	
+}
+
+void testApp::drawUserCenter(ofxUserGenerator * user_generator, int userID) {
+
+	int w = user_generator->getWidth();
+	int h = user_generator->getHeight();
+	ofPoint translationPoint;
+	translationPoint.x = w;
+	translationPoint.y = h/2;
+	translationPoint.z = -500;
+	ofxTrackedUser* user = user_generator->getTrackedUser(userID);
+	XnPoint3D center = user->center;
+	ofPoint pos = user_generator->getWorldCoordinateAt(center.X, center.Y, userID);
+	//TODO figure out where exactly the center is
+	ofPushMatrix();
+	ofTranslate(translationPoint);
+	ofSetColor(0,255,0,255);
+	ofSphere(pos, 10);
+	ofPopMatrix();
+
+
+//	rawPos = *pPosition;
+//	XnPoint3D rawProj = rawPos;
+//	depth_generator.ConvertRealWorldToProjective(1, &rawProj, &rawProj);
+//
+//	projectPos = ofPoint(rawProj.X, rawProj.Y, rawProj.Z);
+//			progPos.x = (projectPos.x / xres);
+//			progPos.y = (projectPos.y / yres);
+//			progPos.z = (projectPos.z / zres);
 }
 
 void testApp::drawPointCloud(ofxUserGenerator * user_generator, int userID) {
