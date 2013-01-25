@@ -147,7 +147,7 @@ void testApp::draw(){
 
 			if (isMasking) drawMasks();
 			if (isCloud) drawPointCloud(&recordUser, 1);	// 0 gives you all point clouds; use userID to see point clouds for specific users
-            drawUserCenter(&recordUser, 1);
+//            drawUserCenter(&recordUser, 1);
 		}
 		if (isTrackingHands)
 			recordHandTracker.drawHands();
@@ -236,44 +236,6 @@ void testApp:: drawMasks() {
 	user1Mask.draw(320, 480, 320, 240);
 	user2Mask.draw(640, 480, 320, 240);
 	
-}
-
-void testApp::drawUserCenter(ofxUserGenerator * user_generator, int userID) {
-
-	int w = user_generator->getWidth();
-	int h = user_generator->getHeight();
-	ofPoint translationPoint;
-	translationPoint.x = w;
-	translationPoint.y = h/2;
-	translationPoint.z = -500;
-	ofxTrackedUser* user = user_generator->getTrackedUser(userID);
-	XnPoint3D center = user->center; //TODO need to convert position to Projective
-	//	depth_generator.ConvertRealWorldToProjective(1, &center, &center);
-	//	pos = ofPoint(center.X, center.Y, center.Z);
-	//			pos.x = (pos.x / xres);
-	//			pos.y = (pos.y / yres);
-	//			pos.z = (pos.z / zres);
-	ofPoint pos = ofPoint(center.X, center.Y, center.Z);
-//	pos.x = 200;
-//	pos.y = 200;
-//	pos.z = 200;
-	ofPushMatrix();
-	ofTranslate(translationPoint);
-	ofSetColor(255,0,255,255);
-	ofNoFill();
-	ofEllipse(pos, 10, 10);
-	ofFill();
-	ofPopMatrix();
-
-
-//	rawPos = *pPosition;
-//	XnPoint3D rawProj = rawPos;
-//	depth_generator.ConvertRealWorldToProjective(1, &rawProj, &rawProj);
-//
-//	projectPos = ofPoint(rawProj.X, rawProj.Y, rawProj.Z);
-//			progPos.x = (projectPos.x / xres);
-//			progPos.y = (projectPos.y / yres);
-//			progPos.z = (projectPos.z / zres);
 }
 
 void testApp::drawPointCloud(ofxUserGenerator * user_generator, int userID) {
